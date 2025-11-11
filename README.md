@@ -34,3 +34,30 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+flowchart TD
+    A([Start: App Open]) --> B[Select Food Type: Veg/Non-Veg/Vegan]
+
+    B --> C[Select Ingredients from List]
+    C --> D[Choose Additional Options]
+    
+    D --> E[Click 'Generate Recipe']
+
+    subgraph AI Processing
+        E --> F[Send Request to AI Model]
+        F --> G[AI Generates Recipe: Name, Steps, Tips]
+    end
+    
+    G --> H[Display Recipe to User]
+
+    H --> I{User Wants Variations?}
+    
+    I -->|Yes| J[Generate Alternative Styles: Home, Restaurant, Healthy]
+    J --> H 
+
+    I -->|No| K{Save Recipe?}
+    K -->|Yes| L[Save Recipe to User Database]
+    K -->|No| M((End Session))
+    
+    L --> M
