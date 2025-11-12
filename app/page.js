@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 
@@ -9,6 +10,9 @@ export default function Home() {
         </section>
         <section className="w-full">
             <HeroSection />
+        </section>
+        <section>
+          <Footer />
         </section>
     </div>
   );
