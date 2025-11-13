@@ -1,24 +1,66 @@
-"use client"; 
+"use client";
+import { Header } from "@/components/Header";
+import { Button } from "@/components/ui/button";
+import useIngredientsStore from "@/Store/useFoodStore";
+import { MagnetIcon, Mail, Search, SendHorizonal, Sparkles } from "lucide-react";
+import { INGREDIENTS } from "@/lib/data"
+import { Footer } from "@/components/Footer";
 
-import useCounterStore from "@/Store/useIngredientsStore";
 
 export default function Counter() {
-  const { count, increment, decrement, reset } = useCounterStore();
+  const { food_type } = useIngredientsStore();
+
 
   return (
-    <div className="flex flex-col items-center gap-3 mt-10">
-      <h1 className="text-2xl font-bold">Counter: {count}</h1>
-      <div className="flex gap-4">
-        <button onClick={increment} className="px-4 py-2 bg-green-500 text-white rounded">
-          +
-        </button>
-        <button onClick={decrement} className="px-4 py-2 bg-red-500 text-white rounded">
-          -
-        </button>
-        <button onClick={reset} className="px-4 py-2 bg-gray-500 text-white rounded">
-          Reset
-        </button>
-      </div>
+    <div className="container mx-auto max-w-5xl">
+      <section>
+        <Header />
+      </section>
+      <h1 className="text-center py-10 text-4xl  font-semibold">What ingredients do you have?</h1>
+      <form
+        action=""
+        className="mx-auto max-w-2xl mt-10">
+        <div className="bg-background has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.5rem)] border pr-2 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
+          <Search className="pointer-events-none absolute inset-y-0 left-4 my-auto size-4" />
+
+          <input
+            placeholder="Your mail address"
+            className="h-12 w-full bg-transparent pl-12 focus:outline-none"
+            type="email"
+          />
+        </div>
+      </form>
+      {/* select ingridients */}
+      <section className="mx-auto max-w-2xl ">
+        {INGREDIENTS.map((Ingredient, index) => (
+          <div key={index}>
+            <h1 className="text-xl text-center font-semibold tracking-tight py-10">
+              {Ingredient.category}
+            </h1>
+            <div className="flex flex-row  gap-10 items-center justify-center flex-wrap ">
+              {Ingredient.items.map((item, index) => (
+                <Button key={index} variant="secondary" className="bg-background border">{item.name} {item.icon}</Button>
+              ))}
+            </div>
+
+          </div>
+        ))}
+      </section>
+
+      {/* Generate Recipie Button  */}
+      <form className="mx-auto max-w-5xl flex justify-center py-10">
+        <Button className="px-6 py-3 text-lg">
+          <Sparkles  className="mr-2" />
+          <span>Generate Recipe</span>
+        </Button>
+      </form>
+
+
+
+      <section>
+        <Footer />
+      </section>
+
     </div>
   );
 }

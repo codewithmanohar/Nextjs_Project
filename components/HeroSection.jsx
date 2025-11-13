@@ -3,7 +3,6 @@
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -11,45 +10,41 @@ import { Button } from "./ui/button"
 import Image from "next/image"
 import { imgs } from "@/lib/data"
 import Link from "next/link"
+import useIngredientsStore from "@/Store/useFoodStore"
 
 export const HeroSection = () => {
+  const { setFoodType } = useIngredientsStore();
+
   return (
     <section className="w-full py-10 px-6 sm:px-10 bg-transparent flex justify-center">
       <Card className="w-full max-w-6xl min-h-[450px] flex flex-col md:flex-row items-center justify-between px-6 md:px-10 gap-10 shadow-lg rounded-2xl border border-gray-200">
         
         {/* LEFT CONTENT */}
         <div className="flex flex-col justify-center items-start w-full md:w-1/2 gap-8 text-center md:text-left">
-          
-          {/* INLINE TITLE + DESCRIPTION */}
           <CardHeader className="p-0 w-full">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-5">
               <CardTitle className="text-3xl sm:text-4xl font-bold whitespace-nowrap">
                 What can we cook today?
               </CardTitle>
-              {/* <CardDescription className="text-base sm:text-lg text-gray-600 text-">
-                Choose your meal type 🍳
-              </CardDescription> */}
             </div>
           </CardHeader>
 
           {/* BUTTONS */}
           <CardContent className="flex flex-wrap justify-center md:justify-start gap-4 p-0">
-            <Link href="/ingredients">
-            <Button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
-              🥕 Vegetarian
-            </Button>
+            <Link href="/ingredients" onClick={() => setFoodType("Vegetarian")}>
+              <Button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
+                🥕 Vegetarian
+              </Button>
             </Link>
-            
-            <Link href="/ingredients">
-            <Button className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
-              🥜 Vegan
-            </Button>
+            <Link href="/ingredients" onClick={() => setFoodType("Vegan")}>
+              <Button className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
+                🥜 Vegan
+              </Button>
             </Link>
-
-            <Link href="/ingredients">
-            <Button className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
-              🥩 Non-Veg
-            </Button>
+            <Link href="/ingredients" onClick={() => setFoodType("Non-Veg")}>
+              <Button className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
+                🥩 Non-Veg
+              </Button>
             </Link>
           </CardContent>
         </div>
