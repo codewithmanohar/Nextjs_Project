@@ -30,7 +30,7 @@ export const Header = () => {
           <div className="flex gap-5 items-center">
           <NavigationMenuItem>
             <Link 
-              href="/favorites"
+              href="/favorite"
               className="text-md ">
               <span>Favorites</span>
             </Link>
