@@ -5,6 +5,8 @@ import useIngredientsStore from "@/Store/useFoodStore";
 import { MagnetIcon, Mail, Search, SendHorizonal, Sparkles } from "lucide-react";
 import { INGREDIENTS } from "@/lib/data"
 import { Footer } from "@/components/Footer";
+import Link from "next/link"
+
 
 
 export default function Counter() {
@@ -12,55 +14,64 @@ export default function Counter() {
 
 
   return (
-    <div className="container mx-auto max-w-5xl">
-      <section>
-        <Header />
-      </section>
-      <h1 className="text-center py-10 text-4xl  font-semibold">What ingredients do you have?</h1>
-      <form
-        action=""
-        className="mx-auto max-w-2xl mt-10">
-        <div className="bg-background has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.5rem)] border pr-2 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
-          <Search className="pointer-events-none absolute inset-y-0 left-4 my-auto size-4" />
+    <>
+      <div className="container mx-auto my-14">
 
-          <input
-            placeholder="Your mail address"
-            className="h-12 w-full bg-transparent pl-12 focus:outline-none"
-            type="email"
-          />
-        </div>
-      </form>
-      {/* select ingridients */}
-      <section className="mx-auto max-w-2xl ">
-        {INGREDIENTS.map((Ingredient, index) => (
-          <div key={index}>
-            <h1 className="text-xl text-center font-semibold tracking-tight py-10">
-              {Ingredient.category}
-            </h1>
-            <div className="flex flex-row  gap-10 items-center justify-center flex-wrap ">
-              {Ingredient.items.map((item, index) => (
-                <Button key={index} variant="secondary" className="bg-background border">{item.name} {item.icon}</Button>
-              ))}
+
+        <section>
+          <Header />
+        </section>
+
+        <div className=" mx-auto max-w-5xl">
+          <h1 className="text-center py-10 text-4xl  font-semibold">What ingredients do you have?</h1>
+          <form
+            action=""
+            className="mx-auto max-w-2xl mt-10">
+            <div className="bg-background has-[input:focus]:ring-muted relative grid grid-cols-[1fr_auto] items-center rounded-[calc(var(--radius)+0.5rem)] border pr-2 shadow shadow-zinc-950/5 has-[input:focus]:ring-2">
+              <Search className="pointer-events-none absolute inset-y-0 left-4 my-auto size-4" />
+
+              <input
+                placeholder="Your mail address"
+                className="h-12 w-full bg-transparent pl-12 focus:outline-none"
+                type="email"
+              />
             </div>
+          </form>
+          {/* select ingridients */}
+          <section className="mx-auto max-w-2xl ">
+            {INGREDIENTS.map((Ingredient, index) => (
+              <div key={index}>
+                <h1 className="text-xl text-center font-semibold tracking-tight py-10">
+                  {Ingredient.category}
+                </h1>
+                <div className="flex flex-row  gap-10 items-center justify-center flex-wrap ">
+                  {Ingredient.items.map((item, index) => (
+                    <Button key={index} variant="secondary" className="bg-background border">{item.name} {item.icon}</Button>
+                  ))}
+                </div>
 
-          </div>
-        ))}
-      </section>
+              </div>
+            ))}
+          </section>
 
-      {/* Generate Recipie Button  */}
-      <form className="mx-auto max-w-5xl flex justify-center py-10">
-        <Button className="px-6 py-3 text-lg">
-          <Sparkles  className="mr-2" />
-          <span>Generate Recipe</span>
-        </Button>
-      </form>
+          {/* Generate Recipie Button  */}
+          <form className="mx-auto max-w-5xl flex justify-center py-10">
+            <Link asChild href="/result">
+              <Button className="px-6 py-3 text-lg" size="xl">
+                <Sparkles className="mr-2" />
+                <span>Generate Recipe</span>
+              </Button>
+            </Link>
+          </form>
 
 
 
-      <section>
-        <Footer />
-      </section>
+          <section>
+            <Footer />
+          </section>
 
-    </div>
+        </div>
+      </div>
+    </>
   );
 }

@@ -4,7 +4,8 @@ import { HeroSection } from "@/components/HeroSection";
 
 export default function Home() {
   return (
-    <div className="w-full mx-auto relative">
+    <div className="container mx-auto my-14 relative bg-gradient-to-r from-orange-200 via-yellow-100 to-pink-100
+">
         <section className="w-full">
           <Header />
         </section>
