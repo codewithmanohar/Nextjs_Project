@@ -56,7 +56,7 @@ export default function Counter() {
 
           {/* Generate Recipie Button  */}
           <form className="mx-auto max-w-5xl flex justify-center py-10">
-            <Link asChild href="/result">
+            <Link href="/result">
               <Button className="px-6 py-3 text-lg" size="xl">
                 <Sparkles className="mr-2" />
                 <span>Generate Recipe</span>

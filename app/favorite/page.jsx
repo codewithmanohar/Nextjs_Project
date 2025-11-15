@@ -13,7 +13,7 @@ const page = () => {
             </section>
             {/* Hero Section */}
 
-            <div class="min-h-[400px]  flex flex-col items-center justify-center text-center px-4">
+            <div className="min-h-[400px]  flex flex-col items-center justify-center text-center px-4">
                 <h1 className='text-primary text-5xl font-semibold py-5 '>
                     Your Favorite Flavors 🍛
                 </h1>
