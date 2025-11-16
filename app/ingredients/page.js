@@ -6,17 +6,26 @@ import { MagnetIcon, Mail, Search, SendHorizonal, Sparkles } from "lucide-react"
 import { INGREDIENTS } from "@/lib/data"
 import { Footer } from "@/components/Footer";
 import Link from "next/link"
+import { useState } from "react";
 
 
 
 export default function Counter() {
   const { food_type } = useIngredientsStore();
 
+  const [selected , setSelected] = useState([]);
+
+   const toggleOption = (item) => {
+    if (selected.includes(item)) {
+      setSelected(selected.filter((x) => x !== item));
+    } else {
+      setSelected([...selected, item]);
+    }
+  };
 
   return (
     <>
       <div className="container mx-auto my-14">
-
 
         <section>
           <Header />
@@ -31,9 +40,9 @@ export default function Counter() {
               <Search className="pointer-events-none absolute inset-y-0 left-4 my-auto size-4" />
 
               <input
-                placeholder="Your mail address"
+                placeholder="Search for Ingredient"
                 className="h-12 w-full bg-transparent pl-12 focus:outline-none"
-                type="email"
+                type="text"
               />
             </div>
           </form>
@@ -46,7 +55,14 @@ export default function Counter() {
                 </h1>
                 <div className="flex flex-row  gap-10 items-center justify-center flex-wrap ">
                   {Ingredient.items.map((item, index) => (
-                    <Button key={index} variant="secondary" className="bg-background border">{item.name} {item.icon}</Button>
+                    <Button 
+                      key={index} 
+                      variant={selected.includes(item.name) ? "destructive" : "outline"}
+                      className="bg"
+                      onClick={() => toggleOption(item.name)}
+                      >{item.name} {item.icon}
+                      
+                    </Button>
                   ))}
                 </div>
 
@@ -57,7 +73,7 @@ export default function Counter() {
           {/* Generate Recipie Button  */}
           <form className="mx-auto max-w-5xl flex justify-center py-10">
             <Link href="/result">
-              <Button className="px-6 py-3 text-lg" size="xl">
+              <Button className="px-6 py-3 text-lg w-xl rounded-2xl" size="xl">
                 <Sparkles className="mr-2" />
                 <span>Generate Recipe</span>
               </Button>
@@ -75,3 +91,40 @@ export default function Counter() {
     </>
   );
 }
+
+// "use client";
+
+// import { useState } from "react";
+// import { Button } from "@/components/ui/button";
+
+// const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
+
+// export default function MultiSelectButtons() {
+//   const [selected, setSelected] = useState([]);
+
+//   const toggleOption = (item) => {
+//     if (selected.includes(item)) {
+//       setSelected(selected.filter((x) => x !== item));
+//     } else {
+//       setSelected([...selected, item]);
+//     }
+//   };
+
+//   return (
+//     <div className="flex flex-wrap gap-4">
+//       {options.map((item) => (
+//         <Button
+//           key={item}
+//           variant={selected.includes(item) ? "default" : "outline"}
+//           className="px-6 py-2"
+//           onClick={() => toggleOption(item)}
+//         >
+//           {item}
+//         </Button>
+//       ))}
+//     </div>
+//   );
+// }
+
+
+

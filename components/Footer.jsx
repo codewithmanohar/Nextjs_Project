@@ -24,10 +24,10 @@ export const Footer = () => {
           <h1 className='font-bold text-xl py-5'>Quick Links</h1>
           <div className='flex flex-col gap-1'>
             <Link href="/favorite" >Favorite</Link>
-            <Link href="/favorite" >Profile</Link>
-            <Link href="/favorite" >About</Link>
-            <Link href="/favorite" >Privacy Policy</Link>
-            <Link href="/favorite" >Terms of Service</Link>
+            <Link href="/profile" >Profile</Link>
+            <Link href="/about" >About</Link>
+            <Link href="/privacy_policy" >Privacy Policy</Link>
+            <Link href="/terms" >Terms of Service</Link>
           </div>
         </div>
 
