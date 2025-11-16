@@ -2,7 +2,7 @@ import { Footer } from "@/components/Footer"
 import { Header } from "@/components/Header"
 import { Button } from "@/components/ui/button"
 import { features, imgs } from "@/lib/data"
-import { MagnetIcon } from "lucide-react"
+import { MagnetIcon, Sparkles } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -69,7 +69,7 @@ const page = () => {
                     Ready to Start Cooking?
                 </h1>
                 <Link href="/result" >
-                    <Button>Generate Your Next Recipe <MagnetIcon /></Button>
+                    <Button>Generate Your Next Recipe <Sparkles /></Button>
                 </Link>
         </div>
 

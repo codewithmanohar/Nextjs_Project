@@ -36,7 +36,7 @@ const page = () => {
           <div key={index}>
             <h2 className='text-xl font-semibold py-5'>{Ingredient.section}</h2>
             {Ingredient.items.map((item, index) => (
-              <div className='flex flex-col gap-3'>
+              <div key={index} className='flex flex-col gap-3'>
                 <h3 className='text-sm text-gray-600 flex items-center gap-2'>
                   <ChefHat className='text-primary' size={15} /> {item}
                 </h3>

@@ -16,7 +16,7 @@ const page = () => {
                 <Header />
             </section>
             <div className="max-w-5xl mx-auto ">
-                <div class="min-h-[150px] flex items-center justify-between  text-center px-4 border border-2 border-amber-600 mt-36 rounded-2xl">
+                <div className="min-h-[150px] flex items-center justify-between  text-center px-4 border border-2 border-amber-600 mt-36 rounded-2xl">
                     <div className='flex gap-10 items-center'>
 
 
