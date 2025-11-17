@@ -2,20 +2,20 @@
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import useIngredientsStore from "@/Store/useFoodStore";
-import {  Search, Sparkles } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import { INGREDIENTS } from "@/lib/data"
 import { Footer } from "@/components/Footer";
 import Link from "next/link"
 
 
 export default function Counter() {
-  const { food_ingridient, addIngredient, removeIngredient } = useIngredientsStore();
+  const { food_type, food_ingridient, addIngredient, removeIngredient } = useIngredientsStore();
 
-  
-   const toggleOption = (item) => {
-    if(food_ingridient.includes(item)){
-      removeIngredient(item); 
-    }else{
+
+  const toggleOption = (item) => {
+    if (food_ingridient.includes(item)) {
+      removeIngredient(item);
+    } else {
       addIngredient(item);
     }
   };
@@ -46,24 +46,33 @@ export default function Counter() {
           {/* select ingridients */}
           <section className="mx-auto max-w-2xl ">
             {INGREDIENTS.map((Ingredient, index) => (
-              <div key={index}>
+              (food_type == "non-veg" || (food_type == "veg" && (Ingredient.categoryTag == "veg" || Ingredient.categoryTag == "vegan")) || (food_type == "vegan" && Ingredient.categoryTag == "vegan") ) ? (
+                <div key={index}>
                 <h1 className="text-xl text-center font-semibold tracking-tight py-10">
                   {Ingredient.category}
                 </h1>
                 <div className="flex flex-row  gap-10 items-center justify-center flex-wrap ">
-                  {Ingredient.items.map((item, index) => (
-                    <Button 
-                      key={index} 
-                      variant={food_ingridient.includes(item.name) ? "destructive" : "outline"}
-                      className="bg"
-                      onClick={() => toggleOption(item.name)}
-                      >{item.name} {item.icon}
-                      
-                    </Button>
-                  ))}
+                  {Ingredient.items.map((item, index) =>
+                    (food_type === "non-veg" ||
+                      (food_type === "veg" && (item.tag === "veg" || item.tag === "vegan")) ||
+                      (food_type === "vegan" && item.tag === "vegan")) ? (
+
+                      <Button
+                        key={index}
+                        variant={food_ingridient.includes(item.name) ? "destructive" : "outline"}
+                        onClick={() => toggleOption(item.name)}
+                      >
+                        {item.name} {item.icon}
+                      </Button>
+
+                    ) : null
+                  )}
+
                 </div>
 
               </div>
+              ): null
+              
             ))}
           </section>
 

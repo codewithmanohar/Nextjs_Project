@@ -2,7 +2,7 @@
 import { create } from "zustand";
 
 const useFoodStore = create((set) => ({
-  food_type: "Potato",
+  food_type: "veg",
   food_ingridient: [],
 
   setFoodType: (newType) => set({ food_type: newType }),

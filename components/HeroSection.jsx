@@ -31,17 +31,17 @@ export const HeroSection = () => {
 
           {/* BUTTONS */}
           <CardContent className="flex flex-wrap justify-center md:justify-start gap-4 p-0">
-            <Link href="/ingredients" onClick={() => setFoodType("Vegetarian")}>
+            <Link href="/ingredients" onClick={() => setFoodType("veg")}>
               <Button className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
                 🥕 Vegetarian
               </Button>
             </Link>
-            <Link href="/ingredients" onClick={() => setFoodType("Vegan")}>
+            <Link href="/ingredients" onClick={() => setFoodType("vegan")}>
               <Button className="bg-amber-500 hover:bg-amber-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
                 🥜 Vegan
               </Button>
             </Link>
-            <Link href="/ingredients" onClick={() => setFoodType("Non-Veg")}>
+            <Link href="/ingredients" onClick={() => setFoodType("non-veg")}>
               <Button className="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg text-sm sm:text-base">
                 🥩 Non-Veg
               </Button>
