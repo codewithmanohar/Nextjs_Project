@@ -27,7 +27,10 @@ const page = () => {
       <section>
         <Image
           alt='dish_img'
-          src={imgs.dish_img} />
+          src="https://images.pexels.com/photos/3928854/pexels-photo-3928854.png?auto=compress&cs=tinysrgb&h=650&w=940" 
+          width={1000}
+          height={100}
+          />
       </section>
 
       <section className='my-10 px-10 py-5 bg-gray-50 rounded-xl'>

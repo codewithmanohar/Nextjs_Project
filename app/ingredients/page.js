@@ -20,6 +20,10 @@ export default function Counter() {
     }
   };
 
+  const GenRecipe = async () => {
+     
+  }
+
   return (
     <>
       <div className="container mx-auto my-14">
