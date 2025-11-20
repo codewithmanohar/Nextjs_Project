@@ -2,8 +2,13 @@
 import { create } from "zustand";
 
 const useFoodStore = create((set) => ({
-  food_type: "veg",
+  food_type: "",
   food_ingridient: [],
+  
+  // API states 
+  recipe: null , 
+  loading: false , 
+  error: null ,
 
   setFoodType: (newType) => set({ food_type: newType }),
 
@@ -18,6 +23,44 @@ const useFoodStore = create((set) => ({
     set((state) => ({
       food_ingridient: state.food_ingridient.filter((i) => i !== item),
     })),
+
+    // Generate Recipe (API Request)
+    getRecipe: async () => {
+        set({loading: true , error: null}); 
+
+        try {
+          const res = await fetch("http://localhost:3000/api/generate" , {
+            method: "POST", 
+            headers: {
+              "Content-Type": "application/json",
+            }, 
+            body: JSON.stringify({
+              food_type: useFoodStore.getState().food_type,
+              selectedIngredients : useFoodStore.getState().food_ingridient,
+            }),
+          }); 
+
+          if(!res.ok){
+            throw new Error("Failed to generate recipe"); 
+          }
+
+          const data = await res.json(); 
+
+          set({
+            recipe: data , 
+            loading: false,
+          })
+        } catch (error) {
+          set({
+            error: error.message, 
+            loading: false ,
+          })
+        }
+    },
+
+    // Clear generated recipe 
+    clearRecipe: () => set({recipe: null}),
+    
 }));
 
 export default useFoodStore;

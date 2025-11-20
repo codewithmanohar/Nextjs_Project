@@ -1,24 +1,61 @@
+"use client"
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Button } from '@/components/ui/button'
 import { COOKING_INSTRUCTIONS, imgs, RECIPE_INGREDIENTS } from '@/lib/data'
 import { ChefHat, Heart, RotateCcw, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
-import React from 'react'
+import useFoodStore  from "@/Store/useFoodStore"
+import { useEffect } from 'react'
+
 
 const page = () => {
+  const { getRecipe , loading , recipe , error } = useFoodStore();
+
+ 
+  
+  console.log(recipe);
+   
+  useEffect(() => {
+    getRecipe();
+  },[]);
+
+  // return (
+  //   <div>
+  //     <button
+  //       onClick={getRecipe}
+  //       disabled={loading}
+  //       className="px-4 py-2 bg-green-600 text-white rounded"
+  //     >
+  //       {loading ? "Generating..." : "Generate Recipe"}
+  //     </button>
+
+  //     {recipe && (
+  //       <pre className="mt-4 bg-gray-100 p-3 text-sm rounded">
+          
+  //         <span>{recipe.recipe_img}</span>
+  //         {/* <span>{recipe.recipe_data.COOKING_INSTRUCTIONS}</span> */}
+  //         {/* <span>{recipe.recipe_data.RECIPE_INGREDIENTS}</span> */}
+
+  //       </pre>
+  //     )}
+  //   </div>
+  // )
+
+  if(loading) {
+    return <span>loading data...</span>
+  }
+
   return (
     <>
-    
    <section>
         <Header />
       </section>
-    <div className='mx-auto container max-w-5xl  my-14'>
-      
-
+    {recipe && <div className='mx-auto container max-w-5xl  my-14'>
       <section className='text-center py-10 w-full flex items-center justify-center flex-col'>
         <h1 className='text-primary text-5xl font-semibold py-5 '>
-          Classic Butter Chicken 🍛
+          {/* Classic Butter Chicken 🍛 */}
+          {recipe.recipe_data.dish_name}
         </h1>
         <p className=' text-gray-500 text-sm text-wrap max-w-2xl  '>
           A rich, creamy, and mildly spiced Indian curry, perfect for a cozy dinner. Best served with naan bread or basmati rice.
@@ -27,15 +64,15 @@ const page = () => {
       <section>
         <Image
           alt='dish_img'
-          src="https://images.pexels.com/photos/3928854/pexels-photo-3928854.png?auto=compress&cs=tinysrgb&h=650&w=940" 
-          width={1000}
+          src={recipe.recipe_img}
+          width={100}
           height={100}
           />
       </section>
 
       <section className='my-10 px-10 py-5 bg-gray-50 rounded-xl'>
         <h1 className='text-2xl py-5 font-bold flex gap-2 items-center'>Ingredients <ShoppingCart /></h1>
-        {RECIPE_INGREDIENTS.map((Ingredient, index) => (
+        {recipe.recipe_data.RECIPE_INGREDIENTS.map((Ingredient, index) => (
           <div key={index}>
             <h2 className='text-xl font-semibold py-5'>{Ingredient.section}</h2>
             {Ingredient.items.map((item, index) => (
@@ -55,7 +92,7 @@ const page = () => {
           Cooking Instructions <ShoppingCart />
         </h1>
 
-        {COOKING_INSTRUCTIONS.map((item,index) => (
+        {recipe.recipe_data.COOKING_INSTRUCTIONS.map((item,index) => (
           <div 
             key={index}
             className='flex gap-5'>
@@ -73,9 +110,11 @@ const page = () => {
       <section>
         <Footer />
       </section>
-    </div>
+    </div>}
+    
      </>
   )
+
 }
 
 export default page

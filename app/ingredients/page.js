@@ -20,9 +20,7 @@ export default function Counter() {
     }
   };
 
-  const GenRecipe = async () => {
-     
-  }
+
 
   return (
     <>
