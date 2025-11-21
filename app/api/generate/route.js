@@ -1,59 +1,64 @@
 import generateRecipe from "@/lib/gemini";
 import genereateImageURL from "@/lib/pexel";
-import axios from "axios";
+import RecipeModel from "@/models/Recipe";
+import { connectDB } from "@/lib/mongoose";   // Make sure this exists
 
+
+
+// -------------------- GET  --------------------
 export async function GET(req) {
-  // const { dish } = await req.json();
-
   try {
-    // const res = await axios.get("https://api.pexels.com/v1/search", {
-    //   headers: {
-    //     Authorization: "LgBfLW1O6ly6uDEvfxInFBfHTBKvlhy0osOWTqKuxW65vykkzC7NxBMV"
-    //   },
-    //   params: {
-    //     query: "paneer tikka",
-    //     per_page: 1,
-        
-    //   }
-    // });
-    const recipe_img = await genereateImageURL("Chicken Butter Masala"); 
+    const recipe_img = await genereateImageURL("Chicken Butter Masala");
 
     return Response.json({
-      url : recipe_img
+      url: recipe_img,
+    });
+  } catch (err) {
+    return Response.json({ error: err.message }, { status: 500 });
+  }
+}
+
+
+// -------------------- POST  --------------------
+export async function POST(req) {
+  try {
+    await connectDB();
+
+    const body = await req.json();
+    const { selectedIngredients, food_type } = body;
+
+    if (!selectedIngredients || !food_type) {
+      return Response.json(
+        { message: "selectedIngredients and food_type are required" },
+        { status: 400 }
+      );
+    }
+
+    // 1. Generate recipe text (using Gemini)
+    const recipe_data = await generateRecipe(food_type, selectedIngredients);
+
+    // Generate recipe image
+    const recipe_img = await genereateImageURL(recipe_data.dish_name);
+
+    // 3. Save recipe in MongoDB
+    const savedRecipe = await RecipeModel.create({
+      dish_name: recipe_data.dish_name,
+      RECIPE_INGREDIENTS: recipe_data.RECIPE_INGREDIENTS,
+      COOKING_INSTRUCTIONS: recipe_data.COOKING_INSTRUCTIONS,
+      recipe_img: recipe_img,
     });
 
-  } catch (err) {
-    return Response.json(err.message);
-  }
-}
-
-export async function POST(req, res) {
-  try {
-    // 1. Get the parsed JSON data
-    const body = await req.json(); 
-
-    // 2. Destructure the property from the parsed body
-    const { selectedIngredients , food_type} = body;
-    console.log(selectedIngredients, food_type);
-
-    if (!selectedIngredients) {
-      // Check for the specific property 'ingridients' now
-      return Response.json({ "message": "ingridients property not found in body" }, { status: 400 });
-    }
-
-    const recipe_data = await generateRecipe(food_type, selectedIngredients);
-    console.log(recipe_data.dish_name);
-
-    const recipe_img = await genereateImageURL(recipe_data.dish_name);
-    console.log("recipe_img :");
-    console.log(recipe_img);
-    const data = {
-      recipe_data , recipe_img
-    }
-    return Response.json(data);
+    // Return API Response
+    return Response.json({
+      message: "Recipe generated & saved!",
+      recipe_data, 
+      recipe_img
+    });
   } catch (error) {
-    // Handle cases where req.json() fails (e.g., bad JSON format)
-    console.log("Error in generate route ");
-    return Response.json(error.message, { status: 500 });
+    console.log("Error in recipe route:", error);
+    return Response.json({ error: error.message }, { status: 500 });
   }
 }
+
+
+
