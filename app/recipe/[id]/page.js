@@ -4,7 +4,7 @@
 import { useParams } from 'next/navigation';
 import useFoodStore from '@/Store/useFoodStore';
 import { useEffect } from 'react';
-import { ChefHat, Heart, RotateCcw, ShoppingCart } from 'lucide-react';
+import { ChefHat, ShoppingCart, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Footer } from '@/components/Footer';
 import Image from 'next/image';
@@ -19,12 +19,17 @@ export default function PostPage() {
   useEffect(() => {
     getRecipeById(postId);
   },[]);
+
+  if(recipesLoading){
+    return <span>Loading data...</span>
+  }
   return (
     <div>
-        {recipeById && <div className='mx-auto container max-w-5xl  my-14'>
-        <section>
+      <section>
           <Header/>
         </section>
+        {recipeById && <div className='mx-auto container max-w-5xl  my-14'>
+        
         <section className='text-center py-10 w-full flex items-center justify-center flex-col'>
           <h1 className='text-primary text-5xl font-semibold py-5 '>
             {/* Classic Butter Chicken 🍛 */}
@@ -84,8 +89,7 @@ export default function PostPage() {
         </section>
 
         <section className='flex gap-5 items-center justify-center my-10' >
-          <Button variant='outline'><Heart /> Save Recipe</Button>
-          <Button variant='default'><RotateCcw /> Generate Variation</Button>
+          <Button variant='outline'><Trash />  Remove </Button>
         </section>
 
         <section>

@@ -1,5 +1,6 @@
 // /Store/useIngredientsStore.js
 import axios from "axios";
+import { AsyncCallbackSet } from "next/dist/server/lib/async-callback-set";
 import { create } from "zustand";
 
 const useFoodStore = create((set) => ({
@@ -88,8 +89,7 @@ const useFoodStore = create((set) => ({
     getRecipeById: async (id) => {
       try {
         set({recipesLoading : true });
-        const res = await axios.get(`http://localhost:3000/api/recipes/${id}`)
-        console.log('DATA :' , res.data);
+        const res = await axios.get(`http://localhost:3000/api/recipes/${id}`);
         set({
           recipeById: res.data,
           recipesLoading: false
@@ -98,6 +98,14 @@ const useFoodStore = create((set) => ({
         set({recipesLoading : false});
         console.log("Error in fetching recipeById");
         return Response.json(error.message);
+      }
+    },
+
+    removeRecipe: async (id) => {
+      try {
+          
+      } catch (error) {
+        
       }
     }
 }));
