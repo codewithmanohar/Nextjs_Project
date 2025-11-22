@@ -32,12 +32,11 @@ export async function DELETE(req, context) {
     const { id } = await context.params; 
 
     if(!id) return Response.json({message : "cannot found id "});
-    const res = await Recipe.findById(id);
+    const res = await Recipe.findByIdAndDelete(id);
 
-    if(!res) return Response.json({message : "Cannot found recipe"},{status : 404});
+    if(!res) return Response.json({message : "Cannot deleted recipe"},{status : 401});
 
-    return Response.json(res );
-    
+    return Response.json({message : "recipe deleted successfully "}, {status:200});
   } catch (error) {
     console.error("Error fetching data:", error);
     
@@ -46,7 +45,7 @@ export async function DELETE(req, context) {
       { status: 500 }
     );
   }
-}-
+}
 // Alternative (more common) syntax for clarity:
 // export async function GET(req, { params }) {
 //   try {
