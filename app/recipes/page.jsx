@@ -11,6 +11,7 @@ import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Loading from '@/components/Loading'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { PaginationDemo } from '@/components/pagination'
 
 const page = () => {
     const { recipes, getAllRecipes, recipesLoading, removeRecipe } = useFoodStore();
@@ -78,6 +79,9 @@ const page = () => {
                             </CardFooter>
                         </Card>
                     ))}
+                    <section>
+                        <PaginationDemo />
+                    </section>
                 </section>
             )}
 

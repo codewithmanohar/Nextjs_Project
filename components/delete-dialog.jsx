@@ -9,20 +9,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import useFoodStore from "@/Store/useFoodStore"
 import { Trash } from "lucide-react"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 
 export function DeleteDialog({ id }) {
   const { removeRecipe } = useFoodStore();
-  // const params = useParams();
-  // const id = params.id ; 
+  const router = useRouter();
 
   const handleDelete = async () => {
     // 1. Ensure removeRecipe is awaited since it likely performs an async operation (like database deletion)
-    console.log(id)
+    
     const success = await removeRecipe(id);
 
     if (success) {
