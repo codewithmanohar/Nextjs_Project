@@ -11,19 +11,21 @@ import { Card, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import Loading from '@/components/Loading'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { PaginationDemo } from '@/components/pagination'
+import PaginationDemo  from '@/components/pagination'
 
 const page = () => {
-    const { recipes, getAllRecipes, recipesLoading, removeRecipe } = useFoodStore();
+    const { recipes, getAllRecipes, recipesLoading, totalPages, currentPage } = useFoodStore();
     const router = useRouter();
-    const {data: session } = useSession();
+    const { data: session } = useSession();
 
     useEffect(() => {
-        getAllRecipes(session?.user?.id);
-    }, []);
+        if (session?.user?.id)
+            getAllRecipes(session.user.id, 1);
+    }, [session]);
+
 
     if (recipesLoading) {
-       return <Loading />
+        return <Loading />
     }
 
     // Handle case where recipe is not found after loading
@@ -75,12 +77,17 @@ const page = () => {
                                     <Link href={`/recipes/${card._id}`}>View Recipe</Link>
                                 </Button>
 
-                                <DeleteDialog id={card._id}  />
+                                <DeleteDialog id={card._id} />
                             </CardFooter>
                         </Card>
                     ))}
                     <section>
-                        <PaginationDemo />
+                        <PaginationDemo
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={(p) => getAllRecipes(session?.user?.id, p)}
+                        />
+
                     </section>
                 </section>
             )}

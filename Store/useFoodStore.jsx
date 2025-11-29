@@ -15,6 +15,8 @@ const useFoodStore = create((set) => ({
   // Recipe states 
   recipes: null,
   recipesLoading: false,
+  totalPages: 1,
+  currentPage: 1,
 
   // Recipe by Id 
   recipeById: null,
@@ -70,22 +72,27 @@ const useFoodStore = create((set) => ({
   // Clear generated recipe 
   clearRecipe: () => set({ recipe: null }),
 
-  getAllRecipes: async (id) => {
-    try {
-      set({ recipesLoading: true });
-      const res = await axios.get(`http://localhost:3000/api/recipes/user/${id}`);
-      
-      set({
-        recipes: res.data.recipes,
-        recipesLoading: false,
-      });
-    } catch (error) {
-      set({ recipesLoading: false });
-      console.log("Error fetching all reciepe store :", error.message);
-      return null
-    }
+  getAllRecipes: async (id, page = 1) => {
+  try {
+    set({ recipesLoading: true });
 
-  },
+    const res = await axios.get(
+      `http://localhost:3000/api/recipes/user/${id}?page=${page}`
+    );
+
+    set({
+      recipes: res.data.recipes,
+      totalPages: res.data.totalPages,
+      currentPage: res.data.currentPage,
+      recipesLoading: false,
+    });
+  } catch (error) {
+    set({ recipesLoading: false });
+    console.log("Error fetching all recipes:", error.message);
+    return null;
+  }
+},
+
 
   getRecipeById: async (id) => {
     try {

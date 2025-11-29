@@ -2,7 +2,6 @@
 import { Footer } from '@/components/Footer'
 import { Header } from '@/components/Header'
 import { Button } from '@/components/ui/button'
-import { COOKING_INSTRUCTIONS, imgs, RECIPE_INGREDIENTS } from '@/lib/data'
 import { ChefHat, Heart, RotateCcw, ShoppingCart } from 'lucide-react'
 import Image from 'next/image'
 import useFoodStore from "@/Store/useFoodStore"
@@ -89,7 +88,13 @@ const page = () => {
 
         <section className='flex gap-5 items-center justify-center my-10' >
           {/* <Button variant='outline'><Heart /> Save Recipe</Button> */}
-          <Button variant='default'><RotateCcw /> Generate Variation</Button>
+          <Button 
+            variant='default'
+            onClick={() => getRecipe(session?.data?.id)}
+            >
+              <RotateCcw />
+               Generate Variation
+              </Button>
         </section>
 
         <section>

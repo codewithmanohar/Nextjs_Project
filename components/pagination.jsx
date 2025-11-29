@@ -1,38 +1,45 @@
+"use client";
+
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
-export function PaginationDemo() {
+export default function PaginationDemo({ currentPage, totalPages, onPageChange }) {
   return (
     <Pagination>
       <PaginationContent>
+
         <PaginationItem>
-          <PaginationPrevious href="1" />
+          <PaginationPrevious
+            className={currentPage === 1 ? "opacity-50 pointer-events-none" : ""}
+            onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
+          />
         </PaginationItem>
+
+        {Array.from({ length: totalPages }).map((_, i) => (
+          <PaginationItem key={i}>
+            <PaginationLink
+              isActive={currentPage === i + 1}
+              onClick={() => onPageChange(i + 1)}
+            >
+              {i + 1}
+            </PaginationLink>
+          </PaginationItem>
+        ))}
+
         <PaginationItem>
-          <PaginationLink href="1" isActive>1</PaginationLink>
+          <PaginationNext
+            className={currentPage === totalPages ? "opacity-50 pointer-events-none" : ""}
+            onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
+          />
         </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="2" >
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href="1" />
-        </PaginationItem>
+
       </PaginationContent>
     </Pagination>
-  )
+  );
 }
