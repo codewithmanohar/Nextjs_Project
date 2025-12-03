@@ -17,7 +17,7 @@ export const Footer = () => {
         <div className="flex flex-col items-start">
           <div className="text-primary flex gap-2 items-center">
             <ChefHat />
-            <span className="text-xl font-semibold">CookMateAI.Com</span>
+            <span className="text-xl font-semibold">CookMateAI</span>
           </div>
           <p className="text-xs text-gray-500 mt-2">
             CookMateAI: Your culinary assistant for delightful recipes.
@@ -28,7 +28,7 @@ export const Footer = () => {
         <div className="md:mx-auto">
           <h1 className="font-bold text-xl pb-3">Quick Links</h1>
           <div className="flex flex-col gap-2 text-sm">
-            <Link href="/favorite">Favorite</Link>
+            <Link href="/recipes">Recipes</Link>
             <Link href="/profile">Profile</Link>
             <Link href="/about">About</Link>
             <Link href="/privacy_policy">Privacy Policy</Link>

@@ -45,7 +45,7 @@ const page = () => {
             {/* Hero Section */}
 
             <div className="min-h-[400px]  flex flex-col items-center justify-center text-center px-4">
-                <h1 className='text-primary text-5xl font-semibold py-5 '>
+                <h1 className='text-primary text-4xl sm:text-5xl font-semibold py-5 '>
                     Your Recipes Flavors 🍛
                 </h1>
                 <p className=' text-gray-500 text-sm text-wrap max-w-2xl  '>
