@@ -1,5 +1,6 @@
 "use client"
 import { CustomToggle } from '@/components/customToggle'
+import { DeleteDialog } from '@/components/edit-dialog'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -45,9 +46,10 @@ const page = () => {
                         </div>
                     </div>
 
-                    <Button variant="outline" className="w-full sm:w-auto">
+                    {/* <Button variant="outline" className="w-full sm:w-auto">
                         Edit Profile
-                    </Button>
+                    </Button> */}
+                    <DeleteDialog />
                 </div>
 
                 {/* Preferences */}
