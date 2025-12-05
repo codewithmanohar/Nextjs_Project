@@ -36,12 +36,18 @@ export const authOptions = {
 
     async session({ session }) {
       await connectDB();
+
       const dbUser = await User.findOne({ email: session.user.email });
-      session.user.id = dbUser._id;
+
+      session.user.id = dbUser._id.toString();
+      session.user.name = dbUser.name;         // UPDATED
+      session.user.image = dbUser.image;       // UPDATED
+
       return session;
     },
   },
 };
+
 
 const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
