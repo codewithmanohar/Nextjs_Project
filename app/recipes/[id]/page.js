@@ -21,7 +21,7 @@ export default function PostPage() {
     getRecipeById(postId);
   }, [postId, getRecipeById]);
 
-  if (recipesLoading) return <Loading />;
+  if (recipesLoading) return <Loading message="Recipes laoding..." />;
 
   if (!recipeById) {
     return (

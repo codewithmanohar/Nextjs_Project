@@ -6,7 +6,7 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { ChefHatIcon } from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -89,7 +89,8 @@ export const  Header = () => {
           </SheetTrigger>
 
           <SheetContent side="right" className="w-52">
-            <div className="flex flex-col gap-6 mt-10 px-5">
+            <div className="flex flex-col gap-2 mt-10 px-5">
+            <SheetTitle >Options</SheetTitle>
               <Link href="/recipes" className="text-lg">
                 My Recipes
               </Link>

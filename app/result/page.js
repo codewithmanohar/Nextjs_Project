@@ -23,7 +23,7 @@ const page = () => {
 
 
   if (loading) {
-    return <Loading />
+    return <Loading message="Recipes Generating..."/>
   }
 
   return (

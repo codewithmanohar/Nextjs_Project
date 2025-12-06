@@ -1,77 +1,90 @@
-import { Button } from "@/components/ui/button"
+"use client";
+
+import { useState } from "react";
+import useAuthStore from "@/store/useAuthStore";
+import { useRouter } from "next/navigation";
 import {
     Dialog,
-    DialogClose,
+    DialogTrigger,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
+    DialogClose,
     DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog"
-import useFoodStore from "@/Store/useFoodStore"
-import { Trash } from "lucide-react"
-import { useParams, useRouter } from "next/navigation"
-import { toast } from "react-toastify"
-import { Label } from "./ui/label"
-import { Input } from "./ui/input"
+    DialogDescription,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "react-toastify";
 
-export function DeleteDialog({ id }) {
-    const { removeRecipe } = useFoodStore();
+
+export function EditDialog({ id }) {
+    const [userName, setUserName] = useState("");
+    const [profileLink, setProfileLink] = useState("");
     const router = useRouter();
+    const { editProfile } = useAuthStore();
 
-    const handleDelete = async () => {
-        const promise = removeRecipe(id);
-        toast.promise(promise, {
-            pending: "Deleting your Recipe...",
-            success: "Recipe deleted successfully! 🎉",
-            error: "Something went wrong ❌"
-        });
+    const handleEdit = async (e) => {
+        e.preventDefault();
+        const data = {
+            name: userName,
+            profile_link: profileLink,
+        };
+        await editProfile(id, data);
+        router.refresh();
+    };
 
-        const success = await promise;
-        if (success)
-            router.push("/");
-        else
-            console.error("Recipe not deleted. An error occurred.");
-    }
     return (
         <Dialog>
-            <form>
-                <DialogTrigger asChild>
-                    <Button variant="outline" className="w-full sm:w-auto">
-                        Edit Profile
-                    </Button> 
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
+            <DialogTrigger asChild>
+                <Button variant="outline" className="w-full sm:w-auto">
+                    Edit Profile
+                </Button>
+            </DialogTrigger>
+
+            <DialogContent className="sm:max-w-[425px]">
+                <form onSubmit={handleEdit}>
                     <DialogHeader>
                         <DialogTitle>Edit Profile</DialogTitle>
                         <DialogDescription>
-                            Make changes to your here. Click save when you&apos; done.
+                            Update your profile details and click save.
                         </DialogDescription>
                     </DialogHeader>
-                    <div className="grid gap-4">
+
+                    <div className="grid gap-4 py-4">
                         <div className="grid gap-3">
-                            <Label htmlFor="name-1">Name</Label>
-                            <Input id="name-1" name="name" defaultValue="Aarav"/>
+                            <Label htmlFor="name">Name</Label>
+                            <Input
+                                id="name"
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                                placeholder="Enter your name"
+                            />
                         </div>
-                    </div>
-                    <div className="grid gap-4">
+
                         <div className="grid gap-3">
-                            <Label htmlFor="name-1">Profile Link</Label>
-                            <Input id="profile-img" name="profile-img" defaultValue="https://google.com"/>
+                            <Label htmlFor="profile-img">Profile Link</Label>
+                            <Input
+                                id="profile-img"
+                                value={profileLink}
+                                onChange={(e) => setProfileLink(e.target.value)}
+                                placeholder="https://yourlink.com"
+                            />
                         </div>
                     </div>
 
-                    <DialogFooter >
+                    <DialogFooter>
                         <DialogClose asChild>
                             <Button variant="outline">Cancel</Button>
                         </DialogClose>
-                        <Button variant="outline" className="w-full sm:w-auto">
+
+                        <Button type="submit" variant="outline">
                             Save
-                        </Button> 
+                        </Button>
                     </DialogFooter>
-                </DialogContent>
-            </form>
+                </form>
+            </DialogContent>
         </Dialog>
-    )
+    );
 }

@@ -7,13 +7,10 @@ export async function PUT(req, context) {
 
     // Get user ID from dynamic route
     const { id } = await context.params;
-    console.log(id)
 
     // Get data from body
     const body = await req.json();
     const { profile_link, name } = body;
-
-    console.log(id, name);
 
     // Update user
     const updatedUser = await User.findByIdAndUpdate(

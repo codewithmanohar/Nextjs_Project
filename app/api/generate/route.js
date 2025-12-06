@@ -1,5 +1,5 @@
 import generateRecipe from "@/lib/gemini";
-import genereateImageURL from "@/lib/pexel";
+import generateImageURL from "@/lib/pexel";
 import RecipeModel from "@/models/Recipe";
 import { connectDB } from "@/lib/mongoose";   // Make sure this exists
 
@@ -8,7 +8,7 @@ import { connectDB } from "@/lib/mongoose";   // Make sure this exists
 // -------------------- GET  --------------------
 export async function GET(req) {
   try {
-    const recipe_img = await genereateImageURL("Chicken Butter Masala");
+    const recipe_img = await generateImageURL("Chicken Butter Masala");
 
     return Response.json({
       url: recipe_img,
@@ -43,9 +43,9 @@ export async function POST(req) {
 
     // 1. Generate recipe text (using Gemini)
     const recipe_data = await generateRecipe(food_type, selectedIngredients);
-
+    
     // Generate recipe image
-    const recipe_img = await genereateImageURL(recipe_data.dish_name);
+    const recipe_img = await generateImageURL(recipe_data.dish_name);
 
     // 3. Save recipe in MongoDB
     const savedRecipe = await RecipeModel.create({

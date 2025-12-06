@@ -1,6 +1,6 @@
 "use client"
 import { CustomToggle } from '@/components/customToggle'
-import { DeleteDialog } from '@/components/edit-dialog'
+import { EditDialog } from '@/components/edit-dialog'
 import { Footer } from '@/components/Footer'
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
@@ -34,7 +34,7 @@ const page = () => {
                             height={90}
                             src={session?.user?.image || PROFILE_INFO.profile_img}
                             className="rounded-full"
-                        />
+                        />  
 
                         <div>
                             <h2 className="text-xl sm:text-2xl font-bold">
@@ -46,10 +46,7 @@ const page = () => {
                         </div>
                     </div>
 
-                    {/* <Button variant="outline" className="w-full sm:w-auto">
-                        Edit Profile
-                    </Button> */}
-                    <DeleteDialog />
+                    <EditDialog id={session?.user?.id} />
                 </div>
 
                 {/* Preferences */}

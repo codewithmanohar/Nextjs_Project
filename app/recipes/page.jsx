@@ -25,7 +25,7 @@ const page = () => {
 
 
     if (recipesLoading) {
-        return <Loading />
+        return <Loading message="Recipes loading..."/>
     }
 
     // Handle case where recipe is not found after loading
