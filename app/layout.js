@@ -1,8 +1,8 @@
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import SessionProvider from "@/components/SessionProvider"
+import SessionProvider from "@/components/session-provider"
 import { Header } from "@/components/Header";
-import ToastProvider from "@/components/ToastProvider";
+import ToastProvider from "@/components/toast-provider";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

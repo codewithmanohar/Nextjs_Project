@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import useIngredientsStore from "@/store/useFoodStore";
+import useIngredientsStore from "@/store/use-food-store";
 import { Search, Sparkles } from "lucide-react";
 import { INGREDIENTS } from "@/lib/data"
 import { Footer } from "@/components/Footer";

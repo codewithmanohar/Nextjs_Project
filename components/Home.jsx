@@ -1,6 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { HeroSection } from "@/components/HeroSection";
+import { HeroSection } from "@/components/hero-section";
 
 export default function Home({user}) {
 

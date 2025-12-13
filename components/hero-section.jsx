@@ -10,7 +10,7 @@ import { Button } from "./ui/button"
 import Image from "next/image"
 import { imgs } from "@/lib/data"
 import Link from "next/link"
-import useIngredientsStore from "@/store/useFoodStore"
+import useIngredientsStore from "@/store/use-food-store"
 
 export const HeroSection = () => {
   const { setFoodType } = useIngredientsStore();
