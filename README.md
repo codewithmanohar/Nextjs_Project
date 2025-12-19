@@ -1,63 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🍳 Cookify – AI Recipe Generator
 
-## Getting Started
+Cookify is an **AI-powered recipe generator** that helps users create delicious recipes based on ingredients, preferences, and dietary choices. Built with **Next.js** and **Google GenAI**, Cookify delivers fast, personalized, and interactive cooking ideas.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+* 🤖 AI-generated recipes using Google GenAI
+* 🥕 Ingredient-based recipe suggestions
+* 🌱 Veg / Non‑Veg preference toggle
+* 🔐 Authentication with NextAuth
+* ⭐ Save & manage favorite recipes
+* 🎨 Modern, responsive UI with Tailwind CSS & Radix UI
+* ⚡ Fast performance with Next.js
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* Next.js
+* React
+* Tailwind CSS
+* Radix UI
+* Zustand (state management)
+
+### Backend
+
+* Next.js API Routes
+* Google GenAI (`@google/genai`)
+* MongoDB with Mongoose
+
+### Authentication
+
+* NextAuth.js
+
+### Utilities
+
+* Axios
+* React Toastify
+* Lucide React / React Icons
+
+---
+
+## 📦 Dependencies (Main)
+
+```json
+next
+react
+@google/genai
+mongoose
+next-auth
+zustand
+tailwindcss
+axios
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 📂 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+app/
+ ├─ api/        # API routes (AI, auth, database)
+ ├─ components/ # Reusable UI components
+ ├─ lib/        # AI, DB, auth configs
+ ├─ store/      # Zustand stores
+ └─ page.jsx    # Main pages
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ⚙️ Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a `.env.local` file and add:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+GOOGLE_API_KEY=your_google_genai_key
+MONGODB_URI=your_mongodb_connection
+NEXTAUTH_SECRET=your_secret
+NEXTAUTH_URL=http://localhost:3000
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ▶️ Getting Started
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+---
+
+## 🧠 How It Works
+
+1. User selects ingredients & preferences
+2. Prompt is sent to Google GenAI
+3. AI generates a custom recipe
+4. Recipe is displayed & can be saved
 
 
-flowchart TD
-    A([Start: App Open]) --> B[Select Food Type: Veg/Non-Veg/Vegan]
 
-    B --> C[Select Ingredients from List]
-    C --> D[Choose Additional Options]
-    
-    D --> E[Click 'Generate Recipe']
+## 👨‍💻 Author
 
-    subgraph AI Processing
-        E --> F[Send Request to AI Model]
-        F --> G[AI Generates Recipe: Name, Steps, Tips]
-    end
-    
-    G --> H[Display Recipe to User]
+**Manohar Kumar**
+Web Developer | MERN Stack | Next.js
 
-    H --> I{User Wants Variations?}
-    
-    I -->|Yes| J[Generate Alternative Styles: Home, Restaurant, Healthy]
-    J --> H 
+* 🌐 Portfolio: [https://tech-manohar.vercel.app/](https://tech-manohar.vercel.app/)
+* 🐙 GitHub: [https://github.com/codewithmanohar](https://github.com/codewithmanohar)
 
-    I -->|No| K{Save Recipe?}
-    K -->|Yes| L[Save Recipe to User Database]
-    K -->|No| M((End Session))
-    
-    L --> M
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
+
+---
+
